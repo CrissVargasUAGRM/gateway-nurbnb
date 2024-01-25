@@ -8,6 +8,8 @@ plugins:
    express-gateway-plugin-body-parser: {}
    createUserPolicy:
      package: './plugins/create-user.manifest.js'
+   commendsProperty:
+     package: './aggregators/plugins/commends-property.js'
 
 crypto:
   cipherKey: sensitiveKey
