@@ -20,12 +20,11 @@ module.exports = {
             const commendsData = await axios.get(actionParams.baseUrl[0] + '/commends/' + id);
             const propertyData = await axios.get(actionParams.baseUrl[1] + '/propiedad/' + id);
 
-            const commends = commendsData.data;
-            const property = propertyData.data;
+            const comentarios = commendsData.data;
+            const propiedad = propertyData.data[0];
+            propiedad.comentarios = comentarios;
 
-            const response = {...property, commends};
-
-            res.status(200).send(response);
+            res.status(200).send(propiedad);
         }
     }
 }
