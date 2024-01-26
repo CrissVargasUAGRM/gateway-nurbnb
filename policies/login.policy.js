@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = {
-    name: 'create-user',
+    name: 'login',
     schema: {
         $id: 'http://express-gateway.io/schemas/policies/proxy.json',
         type:  'object',
@@ -16,7 +16,7 @@ module.exports = {
     policy: (actionParams) => {
         const that = this;
         return async(req, res, next) => {
-            const response = await axios.post(actionParams.baseUrl[0] + '/create-user', req.body);
+            const response = await axios.post(actionParams.baseUrl[0] + '/login', req.body);
             res.status(200).send(response.data);
         }
     }

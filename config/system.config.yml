@@ -10,6 +10,16 @@ plugins:
      package: './plugins/create-user.manifest.js'
    commendsProperty:
      package: './aggregators/plugins/commends-property.js'
+   createCommendPersonPolicy:
+     package: './plugins/create-commend-person.manifest.js'
+   createCommendPropertyPolicy:
+     package: './plugins/create-commend-property.manifest.js'
+   loginPolicy:
+     package: './plugins/login.manifest.js'
+   getUserPolicy:
+     package: './plugins/get-user.manifest.js'
+   getCommendsPropertyPolicy:
+     package: './plugins/get-commend-property.manifest.js'
 
 crypto:
   cipherKey: sensitiveKey

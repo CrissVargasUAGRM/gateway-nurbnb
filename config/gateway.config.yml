@@ -13,6 +13,21 @@ apiEndpoints:
   getCommendsProperty:
     host: ${HOST}
     paths: '/commends-property/:id'
+  postCreateCommendPerson:
+    host: ${HOST}
+    paths: '/commend-person/create'
+  postCreateCommendProperty:
+    host: ${HOST}
+    paths: '/commend-property/create'
+  postLogin:
+    host: ${HOST}
+    paths: '/user/login'
+  getUser:
+    host: ${HOST}
+    paths: '/user/:id'
+  getCommendProperty:
+    host: ${HOST}
+    paths: '/commend-property/:id'
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
@@ -28,6 +43,11 @@ policies:
   - body-parser
   - create-user
   - commeds-property
+  - create-commend-person
+  - create-commend-property
+  - login
+  - get-user
+  - get-commend-property
 pipelines:
   default:
     apiEndpoints:
@@ -61,3 +81,61 @@ pipelines:
           - action:
               changeOrigin: true
               baseUrl: ['${URL_MICROSERVICE_COMMENDS}', '${URL_MICROSERVICE_PROPERTIES}']
+
+  postCreateCommendsPersonPipeline:
+    apiEndpoints:
+      - postCreateCommendPerson
+    policies:
+      - body-parser:
+          - action:
+              json:
+                strict: false
+      - create-commend-person:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
+
+  postCreateCommendsPropertyPipeline:
+    apiEndpoints:
+      - postCreateCommendProperty
+    policies:
+      - body-parser:
+          - action:
+              json:
+                strict: false
+      - create-commend-property:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
+              
+  postLoginPipeline:
+    apiEndpoints:
+      - postLogin
+    policies:
+      - body-parser:
+          - action:
+              json:
+                strict: false
+      - login:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
+
+  getUserPipeline:
+    apiEndpoints:
+      - getUser
+    policies:
+      - get-user:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
+
+  getCommendPropertyPipeline:
+    apiEndpoints:
+      - getCommendProperty
+    policies:
+      - get-commend-property:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
+              
