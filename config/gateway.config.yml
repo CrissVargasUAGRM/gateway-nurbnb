@@ -28,6 +28,12 @@ apiEndpoints:
   getCommendProperty:
     host: ${HOST}
     paths: '/commend-property/:id'
+  getReservesPerson:
+    host: ${HOST}
+    paths: '/reserve/person-id/:id'
+  createReserve:
+    host: ${HOST}
+    paths: '/reserve/create'
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
@@ -48,6 +54,8 @@ policies:
   - login
   - get-user
   - get-commend-property
+  - get-reserves
+  - create-reserve
 pipelines:
   default:
     apiEndpoints:
@@ -138,4 +146,25 @@ pipelines:
           - action:
               changeOrigin: true
               baseUrl: ['${URL_MICROSERVICE_COMMENDS}']
-              
+
+  getReservesPersonPipeline:
+    apiEndpoints:
+      - getReservesPerson
+    policies:
+      - get-reserves:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICES_RESERVES}']
+
+  postCreateReservePipeline:
+    apiEndpoints:
+      - createReserve
+    policies:
+      - body-parser:
+          - action:
+              json:
+                strict: false
+      - create-reserve:
+          - action:
+              changeOrigin: true
+              baseUrl: ['${URL_MICROSERVICES_RESERVES}']

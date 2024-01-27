@@ -20,6 +20,10 @@ plugins:
      package: './plugins/get-user.manifest.js'
    getCommendsPropertyPolicy:
      package: './plugins/get-commend-property.manifest.js'
+   getReservesPersonPolicy:
+     package: './plugins/get-reserves.manifest.js'
+   createReservePolicy:
+     package: './plugins/create-reserve.manifest.js'
 
 crypto:
   cipherKey: sensitiveKey
